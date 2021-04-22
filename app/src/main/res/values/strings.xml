@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Fact card</string>
+    <string name="create">Create</string>
+    <string name="enter_file_name">Enter file name</string>
+    <string name="file_name_empty_error">File name is empty</string>
+    <string name="file_already_exists_error">File already exists</string>
 </resources>

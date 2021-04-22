@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph.xml">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph.xml"
+        app:startDestination="@id/filesFragment">
 
+    <fragment
+            android:id="@+id/filesFragment"
+            android:label="fragment_files"
+            tools:layout="@layout/fragment_files"
+            android:name="ru.dimagor555.factcard.ui.files.FilesFragment" >
+        <action
+                android:id="@+id/action_filesFragment_to_createFileFragment"
+                app:destination="@id/createFileFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/createFileFragment"
+            android:name="ru.dimagor555.factcard.ui.createfiles.CreateFileFragment"
+            android:label="fragment_create_file"
+            tools:layout="@layout/fragment_create_file" />
 </navigation>

@@ -8,6 +8,9 @@ interface FileDao {
     @Query("select * from files order by lastUseTime desc")
     fun getAllFiles(): Flow<List<File>>
 
+    @Query("select count(*) from files where name = :name")
+    suspend fun hasFileWithName(name: String): Boolean
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdateFile(file: File): Long
 
