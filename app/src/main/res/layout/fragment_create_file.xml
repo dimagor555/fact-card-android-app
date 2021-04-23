@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.createfiles.CreateFileFragment">
+        tools:context=".ui.createfile.CreateFileFragment">
 
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/frag_create_file_text_input_layout_name"

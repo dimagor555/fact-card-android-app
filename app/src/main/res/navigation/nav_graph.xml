@@ -16,7 +16,7 @@
     </fragment>
     <fragment
             android:id="@+id/createFileFragment"
-            android:name="ru.dimagor555.factcard.ui.createfiles.CreateFileFragment"
+            android:name="ru.dimagor555.factcard.ui.createfile.CreateFileFragment"
             android:label="fragment_create_file"
             tools:layout="@layout/fragment_create_file" />
 </navigation>

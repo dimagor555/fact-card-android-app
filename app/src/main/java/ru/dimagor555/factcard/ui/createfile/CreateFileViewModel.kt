@@ -1,4 +1,4 @@
-package ru.dimagor555.factcard.ui.createfiles
+package ru.dimagor555.factcard.ui.createfile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
