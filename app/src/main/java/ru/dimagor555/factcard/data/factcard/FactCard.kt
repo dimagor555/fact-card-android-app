@@ -10,4 +10,5 @@ data class FactCard(
     val fileId: Long,
     val positionX: Int,
     val positionY: Int,
+    val textSize: Int,
 )
