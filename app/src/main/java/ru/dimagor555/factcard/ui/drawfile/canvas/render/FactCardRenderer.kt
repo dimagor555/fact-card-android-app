@@ -67,8 +67,11 @@ class FactCardRenderer @Inject constructor(
 
         val borderRadius = FactCardRenderModel.CARD_BORDER_RADIUS * scale
         canvas.drawRoundRect(rect, borderRadius, borderRadius, fillPaint)
-        if (card.selected)
+
+        if (card.selected) {
+            strokePaint.strokeWidth = FactCardRenderModel.BORDER_WIDTH * fileLayout.scale
             canvas.drawRoundRect(rect, borderRadius, borderRadius, strokePaint)
+        }
     }
 
     private fun drawText(canvas: Canvas, card: FactCard) {
