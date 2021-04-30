@@ -1,11 +1,9 @@
 package ru.dimagor555.factcard.ui.drawfile
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import ru.dimagor555.factcard.databinding.FragmentDrawFileBinding
+import ru.dimagor555.factcard.ui.KeyboardUtils
 import ru.dimagor555.factcard.ui.drawfile.canvas.CanvasMode
 
 @AndroidEntryPoint
@@ -61,6 +60,10 @@ class DrawFileFragment : Fragment() {
             if (it == CanvasMode.CARD_TEXT_EDITING) {
                 binding.fragDrawFileCardTextLayout.visibility = View.VISIBLE
                 binding.fragDrawFileCardText.setText(viewModel.fileCanvas.selectedCardText)
+                binding.fragDrawFileCardText.requestFocus()
+                context?.let { context ->
+                    KeyboardUtils.showKeyboard(context, binding.fragDrawFileCardText)
+                }
             } else
                 binding.fragDrawFileCardTextLayout.visibility = View.GONE
         })
@@ -69,17 +72,12 @@ class DrawFileFragment : Fragment() {
     private fun applyCardTextEditing() {
         val text = binding.fragDrawFileCardText.text.toString()
         viewModel.fileCanvas.finishEditingText(text)
-        hideKeyboard()
+        context?.let { KeyboardUtils.hideKeyboard(it, binding.fragDrawFileCanvas.windowToken) }
     }
 
     private fun cancelCardTextEditing() {
         viewModel.fileCanvas.finishEditingText(null)
-        hideKeyboard()
-    }
-
-    private fun hideKeyboard() {
-        val imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(binding.fragDrawFileCanvas.windowToken, 0)
+        context?.let { KeyboardUtils.hideKeyboard(it, binding.fragDrawFileCanvas.windowToken) }
     }
 
     private fun setupBackButtonListener() {
