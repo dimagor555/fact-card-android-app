@@ -36,7 +36,7 @@ class CreateFileFragment : Fragment() {
     private fun initButton() {
         bindings.fragCreateFileBtnCreate.setOnClickListener {
             if (!bindings.fragCreateFileTextInputName.text.isNullOrEmpty()) {
-                val name = bindings.fragCreateFileTextInputName.text.toString()
+                val name = bindings.fragCreateFileTextInputName.text.toString().trim()
                 showError(null)
                 viewModel.onClickCreate(name)
             } else
