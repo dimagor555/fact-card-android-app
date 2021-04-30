@@ -7,8 +7,8 @@ import androidx.room.Query
 
 @Dao
 interface FactCardDao {
-    @Query("select * from fact_cards where fileId = :fileId")
-    suspend fun getFactCardsByFileId(fileId: Long): List<FactCard>
+    @Query("select * from fact_cards where fileName = :fileName")
+    suspend fun getFactCardsByFileName(fileName: String): List<FactCard>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdateFactCard(factCard: FactCard)

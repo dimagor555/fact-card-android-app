@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import ru.dimagor555.factcard.R
 import ru.dimagor555.factcard.databinding.FragmentCreateFileBinding
@@ -23,7 +23,7 @@ class CreateFileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         bindings = FragmentCreateFileBinding.inflate(inflater)
         return bindings.root
     }
@@ -45,13 +45,16 @@ class CreateFileFragment : Fragment() {
     }
 
     private fun bindViewModel() {
-        viewModel.fileId.observe(viewLifecycleOwner, Observer {
+        viewModel.fileName.observe(viewLifecycleOwner, {
             it?.let {
-                // TODO: 22.04.21 navigate to draw screen
+                val navDirection = CreateFileFragmentDirections
+                    .actionCreateFileFragmentToDrawFileFragment(it)
+                Navigation.findNavController(bindings.root)
+                    .navigate(navDirection)
             }
         })
 
-        viewModel.error.observe(viewLifecycleOwner, Observer {
+        viewModel.error.observe(viewLifecycleOwner, {
             it?.let {
                 showError(it)
             }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Факт краты</string>
+    <string name="create">Создать</string>
+    <string name="enter_file_name">Введите имя документа</string>
+    <string name="file_name_empty_error">Имя документа пустое</string>
+    <string name="file_already_exists_error">Документ уже существует</string>
+    <string name="create_fact_card">Создать факт карту</string>
+    <string name="delete_line">Удалить линию</string>
+    <string name="delete_fact_card">Удалить факт карту</string>
+    <string name="edit_card_text">Редактировать текст карты</string>
+    <string name="increase_font">Увеличить шрифт</string>
+    <string name="decrease_font">Уменьшить шрифт</string>
+    <string name="drawing">Рисование</string>
+    <string name="enter_card_new_text">Введите новый текст карты</string>
+    <string name="apply">Подтвердить</string>
+    <string name="cancel">Отмена</string>
+</resources>

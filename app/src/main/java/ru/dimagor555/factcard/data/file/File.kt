@@ -8,7 +8,7 @@ import java.util.*
 @Entity(tableName = "files")
 data class File(
     @PrimaryKey val name: String,
-    val lastUseTime: Long,
+    var lastUseTime: Long,
 ) {
     val lastUseTimeStr: String
         get() = formatter.format(Date(lastUseTime))

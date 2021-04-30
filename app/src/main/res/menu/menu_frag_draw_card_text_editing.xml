@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_apply_edited_card_text"
+            android:title="@string/apply"
+            android:icon="@drawable/outline_done_24"
+            app:showAsAction="ifRoom" />
+    <item
+            android:id="@+id/action_cancel_card_text_editing"
+            android:title="@string/cancel"
+            android:icon="@drawable/outline_cancel_24"
+            app:showAsAction="ifRoom" />
+</menu>

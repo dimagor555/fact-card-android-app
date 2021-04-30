@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/action_delete_fact_card"
+            android:title="@string/delete_fact_card"
+            android:icon="@drawable/delete_outline_24"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/action_edit_card_text"
+            android:title="@string/edit_card_text"
+            android:icon="@drawable/edit_24"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/action_increase_card_font_size"
+            android:title="@string/increase_font"
+            android:icon="@drawable/arrow_upward_24"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/action_decrease_card_font_size"
+            android:title="@string/decrease_font"
+            android:icon="@drawable/arrow_downward_24"
+            app:showAsAction="always" />
+    <item
+            android:id="@+id/action_cancel_card_selection"
+            android:title="@string/cancel"
+            android:icon="@drawable/outline_cancel_24"
+            app:showAsAction="always" />
+</menu>

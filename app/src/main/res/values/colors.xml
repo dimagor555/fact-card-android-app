@@ -3,4 +3,8 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="colorCanvasBg">#121212</color>
+    <color name="colorFactCardBg">#009A63</color>
+    <color name="colorFactCardBorder">#50C878</color>
 </resources>

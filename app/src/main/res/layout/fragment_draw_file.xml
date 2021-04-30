@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.drawfile.DrawFileFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/Widget.MaterialComponents.Toolbar.Surface"
+            android:elevation="2dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/frag_draw_file_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.Toolbar.Surface"
+                app:title="@string/drawing" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize">
+
+        <ru.dimagor555.factcard.ui.drawfile.canvas.FileCanvasView
+                android:id="@+id/frag_draw_file_canvas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/frag_draw_file_card_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.2"
+                android:hint="@string/enter_card_new_text"
+
+                android:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/frag_draw_file_card_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

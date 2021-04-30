@@ -4,4 +4,14 @@
     <string name="enter_file_name">Enter file name</string>
     <string name="file_name_empty_error">File name is empty</string>
     <string name="file_already_exists_error">File already exists</string>
+    <string name="create_fact_card">Create fact card</string>
+    <string name="delete_line">Delete line</string>
+    <string name="delete_fact_card">Delete fact card</string>
+    <string name="edit_card_text">Edit card text</string>
+    <string name="increase_font">Increase font</string>
+    <string name="decrease_font">Decrease font</string>
+    <string name="drawing">Drawing</string>
+    <string name="enter_card_new_text">Enter card\'s new text</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
 </resources>
