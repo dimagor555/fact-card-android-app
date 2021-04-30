@@ -36,12 +36,19 @@ class FilesFragment : Fragment() {
 
     private fun initToolbar() {
         binding.fragFilesToolbar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.action_create_file) {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_filesFragment_to_createFileFragment)
-                return@setOnMenuItemClickListener true
-            } else
-                return@setOnMenuItemClickListener false
+            return@setOnMenuItemClickListener when (it.itemId) {
+                R.id.action_create_file -> {
+                    Navigation.findNavController(binding.root)
+                        .navigate(R.id.action_filesFragment_to_createFileFragment)
+                    true
+                }
+                R.id.action_settings -> {
+                    Navigation.findNavController(binding.root)
+                        .navigate(R.id.action_filesFragment_to_settingsFragment)
+                    true
+                }
+                else -> false
+            }
         }
     }
 

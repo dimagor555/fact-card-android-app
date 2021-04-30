@@ -2,14 +2,13 @@ package ru.dimagor555.factcard.ui.drawfile.canvas.render
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.text.TextPaint
 import dagger.hilt.android.qualifiers.ApplicationContext
-import ru.dimagor555.factcard.R
 import ru.dimagor555.factcard.data.FileCache
 import ru.dimagor555.factcard.data.factcard.FactCard
+import ru.dimagor555.factcard.ui.drawfile.canvas.ColorManager
 import ru.dimagor555.factcard.ui.drawfile.canvas.FileLayout
 import javax.inject.Inject
 
@@ -17,6 +16,7 @@ class FactCardRenderer @Inject constructor(
     @ApplicationContext private val context: Context,
     private val fileLayout: FileLayout,
     private val fileCache: FileCache,
+    colorManager: ColorManager,
 ) {
     private val fillPaint = Paint()
     private val strokePaint = Paint()
@@ -26,17 +26,17 @@ class FactCardRenderer @Inject constructor(
     private val rect = RectF()
 
     init {
-        fillPaint.color = context.resources.getColor(R.color.colorFactCardBg)
+        fillPaint.color = colorManager.factCardBgColor
         fillPaint.style = Paint.Style.FILL
-        strokePaint.color = context.resources.getColor(R.color.colorFactCardBorder)
+        strokePaint.color = colorManager.factCardBorderColor
         strokePaint.style = Paint.Style.STROKE
         strokePaint.strokeWidth = FactCardRenderModel.BORDER_WIDTH
-        textPaint.color = Color.BLACK
+        textPaint.color = colorManager.factCardTextColor
         textPaint.textAlign = Paint.Align.CENTER
 
-        pointFillPaint.color = Color.RED
+        pointFillPaint.color = colorManager.factCardPointColor
         pointFillPaint.style = Paint.Style.FILL_AND_STROKE
-        selectedPointFillPaint.color = Color.CYAN
+        selectedPointFillPaint.color = colorManager.factCardSelectedPointColor
         selectedPointFillPaint.style = Paint.Style.FILL_AND_STROKE
     }
 

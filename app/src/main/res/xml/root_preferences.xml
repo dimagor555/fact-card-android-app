@@ -1,0 +1,57 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+            app:key="colorCanvasBg"
+            app:title="@string/background_color"
+            app:defaultValue="@color/colorCanvasBg" />
+
+    <PreferenceCategory app:title="@string/fact_card_colors">
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+                app:key="colorFactCardBg"
+                app:title="@string/fact_card_bg_color"
+                app:defaultValue="@color/colorFactCardBg" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+                app:key="colorFactCardBorder"
+                app:title="@string/fact_card_border_color"
+                app:defaultValue="@color/colorFactCardBorder" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+                app:key="colorCardPoint"
+                app:title="@string/card_point_color"
+                app:defaultValue="@color/colorCardPoint" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+                app:key="colorSelectedCardPoint"
+                app:title="@string/card_selected_point_color"
+                app:defaultValue="@color/colorSelectedCardPoint" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+                app:key="colorFactCardText"
+                app:title="@string/fact_card_text_color"
+                app:defaultValue="@color/colorFactCardText" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/line_colors">
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+                app:key="colorLine"
+                app:title="@string/line_color"
+                app:defaultValue="@color/colorLine" />
+
+        <com.jaredrummler.android.colorpicker.ColorPreferenceCompat
+                app:key="colorSelectedLine"
+                app:title="@string/selected_line_color"
+                app:defaultValue="@color/colorSelectedLine" />
+
+    </PreferenceCategory>
+
+    <ru.dimagor555.factcard.ui.settings.ResetPreference
+            app:key="reset"
+            app:title="@string/reset"
+            app:summary="@string/reset_color_settings"
+            app:widgetLayout="@layout/pref_button_reset" />
+
+</PreferenceScreen>

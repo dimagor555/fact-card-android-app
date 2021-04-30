@@ -6,4 +6,9 @@
             android:title="@string/create"
             android:icon="@drawable/outline_add_24"
             app:showAsAction="ifRoom" />
+    <item
+            android:id="@+id/action_settings"
+            android:title="@string/settings"
+            android:icon="@drawable/settings_24"
+            app:showAsAction="ifRoom" />
 </menu>
