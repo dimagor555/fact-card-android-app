@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Факт краты</string>
+    <string name="app_name">Факт карты</string>
     <string name="create">Создать</string>
     <string name="enter_file_name">Введите имя документа</string>
     <string name="file_name_empty_error">Имя документа пустое</string>
