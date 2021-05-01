@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package ru.dimagor555.factcard.ui.settings
 
 import android.content.Context

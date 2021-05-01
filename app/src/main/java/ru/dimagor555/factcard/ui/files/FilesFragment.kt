@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,7 +23,7 @@ class FilesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentFilesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,7 +54,7 @@ class FilesFragment : Fragment() {
     private fun initRecyclerView() {
         val adapter = FileItemAdapter()
         binding.fragFilesRecyclerView.adapter = adapter
-        viewModel.allFiles.observe(viewLifecycleOwner, Observer {
+        viewModel.allFiles.observe(viewLifecycleOwner, {
             adapter.setData(it)
         })
     }

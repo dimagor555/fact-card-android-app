@@ -1,5 +1,6 @@
 package ru.dimagor555.factcard.ui.drawfile.canvas
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
@@ -19,6 +20,7 @@ class FileCanvasView constructor(
             initGestureDetector(field!!.gestureListener)
         }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initGestureDetector(gestureListener: FileCanvasGestureListener) {
         val gestureDetector = GestureDetector(context, gestureListener)
         val scaleGestureDetector = ScaleGestureDetector(context, gestureListener)

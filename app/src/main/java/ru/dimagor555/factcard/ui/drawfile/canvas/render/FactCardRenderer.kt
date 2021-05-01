@@ -1,11 +1,9 @@
 package ru.dimagor555.factcard.ui.drawfile.canvas.render
 
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import android.text.TextPaint
-import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.dimagor555.factcard.data.FileCache
 import ru.dimagor555.factcard.data.factcard.FactCard
 import ru.dimagor555.factcard.ui.drawfile.canvas.ColorManager
@@ -13,7 +11,6 @@ import ru.dimagor555.factcard.ui.drawfile.canvas.FileLayout
 import javax.inject.Inject
 
 class FactCardRenderer @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val fileLayout: FileLayout,
     private val fileCache: FileCache,
     colorManager: ColorManager,
