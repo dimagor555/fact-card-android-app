@@ -6,4 +6,10 @@
             android:title="@string/create_fact_card"
             android:icon="@drawable/outline_add_24"
             app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/action_save_canvas_image"
+            android:title="@string/save"
+            android:icon="@drawable/save_24"
+            app:showAsAction="ifRoom" />
 </menu>

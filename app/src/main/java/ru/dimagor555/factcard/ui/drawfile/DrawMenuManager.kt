@@ -22,6 +22,8 @@ class DrawMenuManager(private val toolbar: Toolbar) {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_create_fact_card -> fileCanvas.createFactCardInCenter()
+                R.id.action_save_canvas_image -> fileCanvas.saveCanvasImageToGallery()
+
                 R.id.action_delete_fact_card -> fileCanvas.deleteSelectedFactCard()
                 R.id.action_increase_card_font_size ->
                     fileCanvas.increaseSelectedFactCardTextSize()

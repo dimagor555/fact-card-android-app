@@ -10,14 +10,17 @@ import ru.dimagor555.factcard.data.line.Line
 import ru.dimagor555.factcard.ui.drawfile.canvas.creation.FactCardCreator
 import ru.dimagor555.factcard.ui.drawfile.canvas.input.FileCanvasGestureListener
 import ru.dimagor555.factcard.ui.drawfile.canvas.render.FileRenderer
+import ru.dimagor555.factcard.ui.drawfile.canvas.save.CanvasImageSaver
 import javax.inject.Inject
 
 @ViewModelScoped
 class FileCanvas @Inject constructor(
     private val fileCache: FileCache,
     private val fileRenderer: FileRenderer,
+    private val fileLayout: FileLayout,
     val gestureListener: FileCanvasGestureListener,
     private val factCardCreator: FactCardCreator,
+    private val canvasImageSaver: CanvasImageSaver,
 ) {
     private lateinit var canvasView: FileCanvasView
     var width = 0
@@ -36,7 +39,6 @@ class FileCanvas @Inject constructor(
 
     fun init(fileCanvasView: FileCanvasView) {
         canvasView = fileCanvasView
-        fileRenderer.init(fileCanvasView)
     }
 
     fun selectObject(obj: Any?) {
@@ -132,6 +134,18 @@ class FileCanvas @Inject constructor(
 
     private val lineSelected
         get() = _mode.value == CanvasMode.LINE_SELECTED && selectedObject is Line
+
+    fun saveCanvasImageToGallery() {
+        selectObject(null)
+        val oldTranslateX = fileLayout.translateX
+        val oldTranslateY = fileLayout.translateY
+        val oldScale = fileLayout.scale
+        fileLayout.reset()
+
+        canvasImageSaver.saveFileToImage()
+
+        fileLayout.restore(oldTranslateX, oldTranslateY, oldScale)
+    }
 
     fun render(canvas: Canvas) {
         width = canvas.width

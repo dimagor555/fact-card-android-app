@@ -28,4 +28,8 @@
     <string name="fact_card_text_color">Цвет текста факт карты</string>
     <string name="reset">Сбросить</string>
     <string name="reset_color_settings">Сбросить настройки цветов по умолчанию</string>
+    <string name="save">Сохранить</string>
+    <string name="image_saved_to_gallery">Картинка сохранена в галерею</string>
+    <string name="does_not_have_permissions_to_write_files">Недостаточно прав для записи файлов</string>
+    <string name="failed_to_create_file">Не удалось создать файл</string>
 </resources>

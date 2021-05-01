@@ -3,17 +3,16 @@ package ru.dimagor555.factcard.ui.drawfile.canvas.render
 import android.graphics.Canvas
 import android.graphics.Paint
 import ru.dimagor555.factcard.ui.drawfile.canvas.ColorManager
-import ru.dimagor555.factcard.ui.drawfile.canvas.FileCanvasView
 import javax.inject.Inject
 
 class FileRenderer @Inject constructor(
     private val factCardRenderer: FactCardRenderer,
     private val lineRenderer: LineRenderer,
-    private val colorManager: ColorManager,
+    colorManager: ColorManager,
 ) {
     private val bgPaint = Paint()
 
-    fun init(canvasView: FileCanvasView) {
+    init {
         bgPaint.color = colorManager.canvasBgColor
     }
 

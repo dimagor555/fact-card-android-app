@@ -25,4 +25,16 @@ class FileLayout @Inject constructor() {
     fun onScale(scaleFactor: Float) {
         scale *= scaleFactor
     }
+
+    fun reset() {
+        translateX = 0F
+        translateY = 0F
+        scale = 1F
+    }
+
+    fun restore(x: Float, y: Float, scale: Float) {
+        translateX = x
+        translateY = y
+        this.scale = scale
+    }
 }

@@ -17,7 +17,7 @@ class FileCache @Inject constructor(
     private val factCardDao: FactCardDao,
     private val lineDao: LineDao,
 ) {
-    private lateinit var currFileName: String
+    lateinit var currFileName: String
 
     val factCards = ArrayList<FactCard>()
     val lines = ArrayList<Line>()
