@@ -3,6 +3,7 @@ package ru.dimagor555.factcard.ui.drawfile.canvas
 import android.content.Context
 import androidx.preference.PreferenceManager
 import dagger.hilt.android.qualifiers.ApplicationContext
+import ru.dimagor555.factcard.ui.settings.SettingsResetter
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,7 +32,11 @@ class ColorManager @Inject constructor(
 
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    private fun getColor(colorKey: String) = preferences.getInt(colorKey, 0)
+    private fun getColor(colorKey: String): Int {
+        if (!preferences.contains(colorKey))
+            SettingsResetter.resetAllColors(preferences, context)
+        return preferences.getInt(colorKey, 0)
+    }
 
     companion object {
         const val COLOR_CANVAS_BG = "colorCanvasBg"
@@ -41,7 +46,7 @@ class ColorManager @Inject constructor(
         const val COLOR_CARD_POINT = "colorCardPoint"
         const val COLOR_SELECTED_CARD_POINT = "colorSelectedCardPoint"
         const val COLOR_FACT_CARD_TEXT = "colorFactCardText"
-        
+
         const val COLOR_LINE = "colorLine"
         const val COLOR_SELECTED_LINE = "colorSelectedLine"
     }
