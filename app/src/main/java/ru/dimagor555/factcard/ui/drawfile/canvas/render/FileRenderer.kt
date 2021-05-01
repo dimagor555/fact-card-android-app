@@ -2,9 +2,11 @@ package ru.dimagor555.factcard.ui.drawfile.canvas.render
 
 import android.graphics.Canvas
 import android.graphics.Paint
+import dagger.hilt.android.scopes.ViewModelScoped
 import ru.dimagor555.factcard.ui.drawfile.canvas.ColorManager
 import javax.inject.Inject
 
+@ViewModelScoped
 class FileRenderer @Inject constructor(
     private val factCardRenderer: FactCardRenderer,
     private val lineRenderer: LineRenderer,

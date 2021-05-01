@@ -10,9 +10,11 @@ import android.os.Build
 import android.provider.MediaStore
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
 import java.io.IOException
 import javax.inject.Inject
 
+@ViewModelScoped
 class ImageWriter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {

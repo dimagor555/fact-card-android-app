@@ -3,6 +3,7 @@ package ru.dimagor555.factcard.ui.drawfile.canvas.render
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
+import dagger.hilt.android.scopes.ViewModelScoped
 import ru.dimagor555.factcard.data.FileCache
 import ru.dimagor555.factcard.data.line.Line
 import ru.dimagor555.factcard.ui.drawfile.canvas.ColorManager
@@ -10,6 +11,7 @@ import ru.dimagor555.factcard.ui.drawfile.canvas.FileLayout
 import ru.dimagor555.factcard.ui.drawfile.canvas.creation.LinePathBuilder
 import javax.inject.Inject
 
+@ViewModelScoped
 class LineRenderer @Inject constructor(
     private val fileLayout: FileLayout,
     private val fileCache: FileCache,
