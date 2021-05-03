@@ -71,6 +71,8 @@ class DrawFileFragment : Fragment() {
 
     private fun applyCardTextEditing() {
         val text = binding.fragDrawFileCardText.text.toString()
+            .trim()
+            .replace("\\s+".toRegex(), " ")
         viewModel.fileCanvas.finishEditingText(text)
         context?.let { KeyboardUtils.hideKeyboard(it, binding.fragDrawFileCanvas.windowToken) }
     }

@@ -57,12 +57,14 @@ class TextRenderer @Inject constructor(
 
         var textEnded = false
         var prevIndex = 0
-        for (i in 0 until maxLines) {
+        for (i in 1..maxLines) {
             val measuredCharsCount = textPaint.breakText(
                 text, prevIndex, text.length,
                 true, textMaxWidth, null
             )
-            val currIndex = prevIndex + measuredCharsCount
+            val currIndex =
+                if (i == maxLines) prevIndex + measuredCharsCount
+                else getCurrIndexWithoutWordBreak(text, prevIndex, measuredCharsCount)
             lines += text.substring(prevIndex until currIndex)
 
             if (currIndex == text.length) {
@@ -77,5 +79,35 @@ class TextRenderer @Inject constructor(
             }
 
         return lines.filterNotNull()
+    }
+
+    private fun getCurrIndexWithoutWordBreak(
+        text: String,
+        prevIndex: Int,
+        measuredCharsCount: Int
+    ): Int {
+        val currIndex = prevIndex + measuredCharsCount
+        var currLine = text.substring(prevIndex until currIndex)
+
+        if (!currLine.contains(" ") || currLine.endsWith(" "))
+            return currIndex
+        if (!currLine.startsWith(" "))
+            currLine = currLine.trim()
+
+        val words = text.split(" ")
+        var currWordsText = words[0]
+        for (i in 1 until words.size) {
+            currWordsText += " " + words[i]
+            if (currWordsText.length > currIndex) {
+                if (currWordsText.length == currIndex)
+                    return currIndex
+                else
+                    break
+            }
+        }
+
+        val lastSpaceIndex = currLine.indexOfLast { it == ' ' } + 1
+        return prevIndex + currLine
+            .substring(0 until lastSpaceIndex).length
     }
 }
