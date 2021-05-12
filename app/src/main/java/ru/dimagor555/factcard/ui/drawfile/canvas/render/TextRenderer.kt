@@ -75,7 +75,8 @@ class TextRenderer @Inject constructor(
         }
         if (!textEnded)
             lines[lines.lastIndex]?.let {
-                lines[lines.lastIndex] = it.substring(0 until it.length - 3) + "..."
+                if (it.length > 3)
+                    lines[lines.lastIndex] = it.substring(0 until it.length - 3) + "..."
             }
 
         return lines.filterNotNull()
