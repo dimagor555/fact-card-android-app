@@ -26,7 +26,7 @@ class DrawFileViewModel @Inject constructor(
     private suspend fun updateFileLastUseTime(fileName: String) {
         val fileToUpdateLastUseTime = fileDao.getFileByName(fileName)
         fileToUpdateLastUseTime.lastUseTime = System.currentTimeMillis()
-        fileDao.insertOrUpdateFile(fileToUpdateLastUseTime)
+        fileDao.updateFile(fileToUpdateLastUseTime)
     }
 
     override fun onCleared() {

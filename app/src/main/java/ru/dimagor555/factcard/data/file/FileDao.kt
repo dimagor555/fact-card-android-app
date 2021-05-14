@@ -14,8 +14,11 @@ interface FileDao {
     @Query("select * from files where name = :name")
     suspend fun getFileByName(name: String): File
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertOrUpdateFile(file: File)
+    @Insert
+    suspend fun insertFile(file: File)
+
+    @Update
+    suspend fun updateFile(file: File)
 
     @Delete
     suspend fun deleteFile(file: File)

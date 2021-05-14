@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,33 +9,78 @@
                 type="ru.dimagor555.factcard.data.file.File" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:orientation="horizontal">
 
-        <TextView
-                android:id="@+id/item_file_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{file.name}"
-                android:textSize="20sp"
-                android:layout_margin="4dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="start"
-                android:layout_weight="2"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_file_view_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorError">
 
-        <TextView
-                android:id="@+id/item_file_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{file.lastUseTimeStr}"
-                android:textSize="12sp"
-                android:layout_margin="4dp"
-                android:layout_gravity="center_vertical"
-                android:gravity="end"
-                android:layout_weight="1"/>
+            <ImageView
+                    android:id="@+id/item_file_image_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/delete_outline_24"
+                    app:tint="@android:color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="20dp" />
 
-    </LinearLayout>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/item_file_image_delete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+                android:id="@+id/item_file_view_foreground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorSurface">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:id="@+id/item_file_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{file.name}"
+                        android:textSize="20sp"
+                        android:layout_margin="4dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="start"
+                        android:layout_weight="2" />
+
+                <TextView
+                        android:id="@+id/item_file_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{file.lastUseTimeStr}"
+                        android:textSize="12sp"
+                        android:layout_margin="4dp"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="end"
+                        android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
 </layout>

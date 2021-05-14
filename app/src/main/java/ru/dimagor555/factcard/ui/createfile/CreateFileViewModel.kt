@@ -42,7 +42,7 @@ class CreateFileViewModel @Inject constructor(
 
     private fun createFile(file: File) {
         viewModelScope.launch {
-            fileDao.insertOrUpdateFile(file)
+            fileDao.insertFile(file)
             _fileName.postValue(file.name)
         }
     }

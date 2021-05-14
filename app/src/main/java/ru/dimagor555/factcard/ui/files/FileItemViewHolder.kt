@@ -8,6 +8,8 @@ import ru.dimagor555.factcard.databinding.ListItemFileBinding
 class FileItemViewHolder(
     private val binding: ListItemFileBinding
 ) : RecyclerView.ViewHolder(binding.root) {
+    val viewForeground = binding.itemFileViewForeground
+
     fun bind(file: File) {
         binding.file = file
         binding.executePendingBindings()

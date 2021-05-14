@@ -32,4 +32,7 @@
     <string name="image_saved_to_gallery">Картинка сохранена в галерею</string>
     <string name="does_not_have_permissions_to_write_files">Недостаточно прав для записи файлов</string>
     <string name="failed_to_create_file">Не удалось создать файл</string>
+    <string name="delete">Удалить</string>
+    <string name="undo">Отменить</string>
+    <string name="file_deleted">Файл удалён</string>
 </resources>

@@ -1,12 +1,18 @@
 package ru.dimagor555.factcard.data.factcard
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Ignore
-import androidx.room.PrimaryKey
+import androidx.room.*
+import ru.dimagor555.factcard.data.file.File
 import ru.dimagor555.factcard.ui.drawfile.canvas.render.FactCardRenderModel
 
-@Entity(tableName = "fact_cards")
+@Entity(
+    tableName = "fact_cards",
+    foreignKeys = [ForeignKey(
+        entity = File::class,
+        parentColumns = ["name"],
+        childColumns = ["fileName"],
+        onDelete = ForeignKey.CASCADE,
+    )]
+)
 data class FactCard(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     var text: String = "",

@@ -31,4 +31,7 @@
     <string name="image_saved_to_gallery">Image saved to gallery</string>
     <string name="does_not_have_permissions_to_write_files">Does not have permissions to write files</string>
     <string name="failed_to_create_file">Failed to create file</string>
+    <string name="delete">Delete</string>
+    <string name="file_deleted">File deleted</string>
+    <string name="undo">Undo</string>
 </resources>
