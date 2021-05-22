@@ -1,20 +1,21 @@
 package ru.dimagor555.factcard.ui.drawfile.canvas.save
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Rect
+import android.graphics.*
 import android.widget.Toast
+import androidx.core.graphics.toRect
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
 import ru.dimagor555.factcard.R
 import ru.dimagor555.factcard.data.FileCache
 import ru.dimagor555.factcard.ui.drawfile.canvas.FileLayout
+import ru.dimagor555.factcard.ui.drawfile.canvas.creation.LinePathBuilder
 import ru.dimagor555.factcard.ui.drawfile.canvas.render.FactCardRenderModel
 import ru.dimagor555.factcard.ui.drawfile.canvas.render.FileRenderer
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 @ViewModelScoped
 class CanvasImageSaver @Inject constructor(
@@ -22,6 +23,7 @@ class CanvasImageSaver @Inject constructor(
     private val fileCache: FileCache,
     private val fileRenderer: FileRenderer,
     private val fileLayout: FileLayout,
+    private val linePathBuilder: LinePathBuilder,
     private val imageWriter: ImageWriter,
 ) {
     fun saveFileToImage() {
@@ -44,18 +46,14 @@ class CanvasImageSaver @Inject constructor(
         var minY = Integer.MAX_VALUE
         var maxX = Integer.MIN_VALUE
         var maxY = Integer.MIN_VALUE
-        fileCache.factCards.forEach {
-            val cardX = it.positionX
-            val cardY = it.positionY
 
-            if (cardX < minX) minX = cardX
-            if (cardY < minY) minY = cardY
-
-            if (cardX > maxX) maxX = cardX
-            if (cardY > maxY) maxY = cardY
+        val allBounds = computeCardsBounds() + computeLinesBounds()
+        allBounds.forEach {
+            if (it.left < minX) minX = it.left
+            if (it.top < minY) minY = it.top
+            if (it.right > maxX) maxX = it.right
+            if (it.bottom > maxY) maxY = it.bottom
         }
-        maxX += FactCardRenderModel.WIDTH
-        maxY += FactCardRenderModel.HEIGHT
 
         minX -= IMAGE_BORDERS_OFFSET
         minY -= IMAGE_BORDERS_OFFSET
@@ -63,6 +61,32 @@ class CanvasImageSaver @Inject constructor(
         maxY += IMAGE_BORDERS_OFFSET
 
         return Rect(minX, minY, maxX, maxY)
+    }
+
+    private fun computeCardsBounds(): List<Rect> {
+        val toReturn = ArrayList<Rect>()
+        fileCache.factCards.forEach {
+            val cardLeft = it.positionX
+            val cardRight = it.positionX + FactCardRenderModel.WIDTH
+            val cardTop = it.positionY
+            val cardBottom = it.positionY + FactCardRenderModel.HEIGHT
+
+            toReturn += Rect(cardLeft, cardTop, cardRight, cardBottom)
+        }
+        return toReturn
+    }
+
+    private fun computeLinesBounds(): List<Rect> {
+        val toReturn = ArrayList<Rect>()
+
+        val linePath = Path()
+        val lineBounds = RectF()
+        fileCache.lines.forEach {
+            linePathBuilder.buildLineToPath(it, linePath)
+            linePath.computeBounds(lineBounds, false)
+            toReturn += lineBounds.toRect()
+        }
+        return toReturn
     }
 
     private fun saveBitmapToGallery(bitmap: Bitmap) {
