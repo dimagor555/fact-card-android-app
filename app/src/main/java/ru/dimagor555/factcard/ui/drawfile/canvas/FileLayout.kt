@@ -9,8 +9,10 @@ class FileLayout @Inject constructor() {
         private set
     var translateY = 0F
         private set
-    var scale = 1F
-        private set
+    var scale = DEFAULT_SCALE
+        private set(value) {
+            field = value.coerceIn(SCALE_RANGE)
+        }
 
     val scaledTranslateX
         get() = translateX * scale
@@ -36,5 +38,10 @@ class FileLayout @Inject constructor() {
         translateX = x
         translateY = y
         this.scale = scale
+    }
+
+    companion object {
+        private const val DEFAULT_SCALE = 1f
+        private val SCALE_RANGE = (DEFAULT_SCALE / 5f)..(DEFAULT_SCALE * 5f)
     }
 }
