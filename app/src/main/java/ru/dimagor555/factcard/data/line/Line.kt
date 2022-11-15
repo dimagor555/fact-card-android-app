@@ -15,13 +15,6 @@ import ru.dimagor555.factcard.data.file.File
         ],
         unique = true
     )],
-//    primaryKeys = [
-//        "fileName",
-//        "firstCardId",
-//        "secondCardId",
-//        "firstPointId",
-//        "secondPointId"
-//    ],
     foreignKeys = [ForeignKey(
         entity = File::class,
         parentColumns = ["idFile"],

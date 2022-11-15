@@ -21,6 +21,7 @@ data class File(
     override fun toString(): String {
         return  "idFile = $idFile\n" +
                 "name = $name\n" +
+                "color = $name\n" +
                 "lastUseTime = $lastUseTimeStr\n"
     }
 }
