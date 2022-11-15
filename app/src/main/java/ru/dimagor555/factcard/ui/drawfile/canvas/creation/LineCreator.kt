@@ -13,7 +13,7 @@ class LineCreator @Inject constructor(
         val firstCardPoint = firstCard.selectedPoint
         firstCardPoint?.let {
             fileCache.onLineCreated(
-                firstCard.id, secondCard.id,
+                firstCard.idFactCard, secondCard.idFactCard,
                 firstCardPoint, secondCardPoint
             )
         }

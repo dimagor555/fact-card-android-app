@@ -118,7 +118,7 @@ class CanvasImageSaver @Inject constructor(
     private fun generateFileName(): String {
         val dateFormat = SimpleDateFormat("hhmmss_ddMMyyyy", Locale.ROOT)
         val currDate = dateFormat.format(Date(System.currentTimeMillis()))
-        return "${fileCache.currFileName}_$currDate.png"
+        return "${fileCache.currFileId}_$currDate.png"
     }
 
     companion object {

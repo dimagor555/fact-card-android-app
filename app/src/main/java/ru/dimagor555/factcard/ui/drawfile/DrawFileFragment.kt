@@ -55,7 +55,7 @@ class DrawFileFragment : Fragment() {
     }
 
     private fun bindViewModel() {
-        viewModel.setFileId(args.fileName)
+        viewModel.setFileId(args.fileId)
         viewModel.fileCanvas.mode.observe(viewLifecycleOwner, {
             if (it == CanvasMode.CARD_TEXT_EDITING) {
                 binding.fragDrawFileCardTextLayout.visibility = View.VISIBLE

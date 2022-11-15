@@ -1,5 +1,6 @@
 package ru.dimagor555.factcard.ui.createfile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,11 +16,13 @@ import javax.inject.Inject
 class CreateFileViewModel @Inject constructor(
     private val fileDao: FileDao,
 ) : ViewModel() {
-    private val _fileName = MutableLiveData<String?>(null)
+    private val _fileId = MutableLiveData<Long?>(null)
+//    private val _fileName = MutableLiveData<String?>(null)
     private val _error = MutableLiveData<Int?>(null)
     private var createFileInProgress = false
 
-    val fileName: LiveData<String?> = _fileName
+    val fileId: LiveData<Long?> = _fileId
+//    val fileName: LiveData<String?> = _fileName
     val error: LiveData<Int?> = _error
 
     fun onClickCreate(name: String) {
@@ -42,8 +45,11 @@ class CreateFileViewModel @Inject constructor(
 
     private fun createFile(file: File) {
         viewModelScope.launch {
-            fileDao.insertFile(file)
-            _fileName.postValue(file.name)
+            Log.d("CREATE FILE", file.toString())
+            file.idFile = fileDao.insertFile(file)
+            Log.d("CREATE FILE 2", file.toString())
+            _fileId.postValue(file.idFile)
+//            _fileName.postValue(file.name)
         }
     }
 }

@@ -15,7 +15,7 @@ class FileItemViewHolder(
         binding.executePendingBindings()
         binding.root.setOnClickListener(
             Navigation.createNavigateOnClickListener(
-                FilesFragmentDirections.actionFilesFragmentToDrawFileFragment(file.name)
+                FilesFragmentDirections.actionFilesFragmentToDrawFileFragment(file.idFile)
             )
         )
     }

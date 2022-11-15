@@ -39,7 +39,7 @@
             android:label="fragment_draw_file"
             tools:layout="@layout/fragment_draw_file">
         <argument
-                android:name="fileName"
-                app:argType="string" />
+                android:name="fileId"
+                app:argType="long" />
     </fragment>
 </navigation>

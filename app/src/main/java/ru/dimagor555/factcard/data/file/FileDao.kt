@@ -14,8 +14,11 @@ interface FileDao {
     @Query("select * from files where name = :name")
     suspend fun getFileByName(name: String): File
 
+    @Query("select * from files where idFile = :idFile")
+    suspend fun getFileById(idFile: Long): File
+
     @Insert
-    suspend fun insertFile(file: File)
+    suspend fun insertFile(file: File): Long
 
     @Update
     suspend fun updateFile(file: File)

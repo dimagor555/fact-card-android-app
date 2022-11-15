@@ -10,6 +10,7 @@ import ru.dimagor555.factcard.data.factcard.FactCardDao
 import ru.dimagor555.factcard.data.line.Line
 import ru.dimagor555.factcard.data.line.LineDao
 import javax.inject.Inject
+import kotlin.properties.Delegates
 import kotlin.random.Random
 
 @ViewModelScoped
@@ -17,7 +18,7 @@ class FileCache @Inject constructor(
     private val factCardDao: FactCardDao,
     private val lineDao: LineDao,
 ) {
-    lateinit var currFileName: String
+    var currFileId by Delegates.notNull<Long>()
 
     val factCards = ArrayList<FactCard>()
     val lines = ArrayList<Line>()
@@ -25,19 +26,19 @@ class FileCache @Inject constructor(
     private val factCardsStates: MutableMap<Long, CacheState> = HashMap()
     private val linesStates: MutableMap<Line, CacheState> = HashMap()
 
-    suspend fun loadFileByName(fileName: String) {
-        currFileName = fileName
+    suspend fun loadFileById(fileId: Long) {
+        currFileId = fileId
 
         factCards.clear()
         lines.clear()
 
-        factCards += factCardDao.getFactCardsByFileName(fileName)
-        lines += lineDao.getLinesByFileName(fileName)
+        factCards += factCardDao.getFactCardsByFileId(fileId)
+        lines += lineDao.getLinesByFileId(fileId)
 
         factCardsStates.clear()
         linesStates.clear()
 
-        factCards.forEach { factCardsStates += it.id to CacheState.NOT_CHANGED }
+        factCards.forEach { factCardsStates += it.idFactCard to CacheState.NOT_CHANGED }
         lines.forEach { linesStates += it to CacheState.NOT_CHANGED }
 
         with(CoroutineScope(currentCoroutineContext())) {
@@ -52,13 +53,13 @@ class FileCache @Inject constructor(
 
     fun onFactCardCreate(x: Int, y: Int) {
         val card = FactCard(
-            id = generateRandomUniqueId(),
-            fileName = currFileName,
+            idFactCard = generateRandomUniqueId(),
+            fileId = currFileId,
             positionX = x,
             positionY = y,
         )
         factCards += card
-        factCardsStates[card.id] = CacheState.CHANGED
+        factCardsStates[card.idFactCard] = CacheState.CHANGED
     }
 
     private fun generateRandomUniqueId(): Long {
@@ -73,9 +74,9 @@ class FileCache @Inject constructor(
 
     fun onFactCardDeleted(card: FactCard) {
         factCards -= card
-        factCardsStates[card.id] = CacheState.DELETED
+        factCardsStates[card.idFactCard] = CacheState.DELETED
 
-        linesStates.filter { it.key.firstCardId == card.id || it.key.secondCardId == card.id }
+        linesStates.filter { it.key.firstCardId == card.idFactCard || it.key.secondCardId == card.idFactCard }
             .forEach {
                 lines -= it.key
                 linesStates[it.key] = CacheState.DELETED
@@ -83,7 +84,7 @@ class FileCache @Inject constructor(
     }
 
     fun onFactCardChanged(card: FactCard) {
-        factCardsStates[card.id] = CacheState.CHANGED
+        factCardsStates[card.idFactCard] = CacheState.CHANGED
     }
 
     fun onLineCreated(
@@ -91,8 +92,13 @@ class FileCache @Inject constructor(
         firstCardPoint: Int, secondCardPoint: Int
     ) {
         if (!lineAlreadyExists(firstCardId, secondCardId, firstCardPoint, secondCardPoint)) {
-            val createdLine =
-                Line(currFileName, firstCardId, secondCardId, firstCardPoint, secondCardPoint)
+            val createdLine = Line(
+                                    fileId = currFileId,
+                                    firstCardId = firstCardId,
+                                    secondCardId = secondCardId,
+                                    firstPointId = firstCardPoint,
+                                    secondPointId = secondCardPoint
+                              )
             lines += createdLine
             linesStates[createdLine] = CacheState.CHANGED
         }
@@ -131,7 +137,7 @@ class FileCache @Inject constructor(
 
         factCardsStates.filterValues { it == CacheState.CHANGED }
             .forEach { state ->
-                val changedCard = factCards.find { it.id == state.key }
+                val changedCard = factCards.find { it.idFactCard == state.key }
                 changedCard?.let { factCardDao.insertOrUpdateFactCard(it) }
             }
 

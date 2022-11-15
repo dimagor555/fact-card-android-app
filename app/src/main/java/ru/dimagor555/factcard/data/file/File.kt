@@ -7,7 +7,8 @@ import java.util.*
 
 @Entity(tableName = "files")
 data class File(
-    @PrimaryKey val name: String,
+    @PrimaryKey(autoGenerate = true) var idFile: Long = 0,
+    val name: String,
     var lastUseTime: Long,
 ) {
     val lastUseTimeStr: String
@@ -15,5 +16,11 @@ data class File(
 
     companion object {
         private val formatter = SimpleDateFormat.getDateTimeInstance()
+    }
+
+    override fun toString(): String {
+        return  "idFile = $idFile\n" +
+                "name = $name\n" +
+                "lastUseTime = $lastUseTimeStr\n"
     }
 }
