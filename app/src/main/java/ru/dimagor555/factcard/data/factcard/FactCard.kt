@@ -8,15 +8,15 @@ import ru.dimagor555.factcard.ui.drawfile.canvas.render.FactCardRenderModel
     tableName = "fact_cards",
     foreignKeys = [ForeignKey(
         entity = File::class,
-        parentColumns = ["name"],
-        childColumns = ["fileName"],
+        parentColumns = ["idFile"],
+        childColumns = ["fileId"],
         onDelete = ForeignKey.CASCADE,
     )]
 )
 data class FactCard(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) val idFactCard: Long = 0,
     var text: String = "",
-    val fileName: String,
+    val fileId: Long,
     var positionX: Int = 0,
     var positionY: Int = 0,
     @ColumnInfo(name = "textSize")

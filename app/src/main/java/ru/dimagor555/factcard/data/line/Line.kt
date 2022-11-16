@@ -1,28 +1,30 @@
 package ru.dimagor555.factcard.data.line
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.Ignore
+import androidx.room.*
 import ru.dimagor555.factcard.data.file.File
 
 @Entity(
     tableName = "lines",
-    primaryKeys = [
-        "fileName",
-        "firstCardId",
-        "secondCardId",
-        "firstPointId",
-        "secondPointId"
-    ],
+    indices = [Index(
+        value = [
+                "fileId",
+                "firstCardId",
+                "secondCardId",
+                "firstPointId",
+                "secondPointId"
+        ],
+        unique = true
+    )],
     foreignKeys = [ForeignKey(
         entity = File::class,
-        parentColumns = ["name"],
-        childColumns = ["fileName"],
+        parentColumns = ["idFile"],
+        childColumns = ["fileId"],
         onDelete = ForeignKey.CASCADE,
     )]
 )
 data class Line(
-    val fileName: String,
+    @PrimaryKey(autoGenerate = true) val idLine: Long = 0,
+    val fileId: Long,
     val firstCardId: Long,
     val secondCardId: Long,
     val firstPointId: Int,

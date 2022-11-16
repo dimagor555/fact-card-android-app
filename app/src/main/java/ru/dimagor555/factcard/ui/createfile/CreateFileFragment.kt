@@ -45,7 +45,7 @@ class CreateFileFragment : Fragment() {
     }
 
     private fun bindViewModel() {
-        viewModel.fileName.observe(viewLifecycleOwner, {
+        viewModel.fileId.observe(viewLifecycleOwner, {
             it?.let {
                 val navDirection = CreateFileFragmentDirections
                     .actionCreateFileFragmentToDrawFileFragment(it)

@@ -15,7 +15,7 @@ import ru.dimagor555.factcard.data.line.LineDao
         FactCard::class,
         Line::class,
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

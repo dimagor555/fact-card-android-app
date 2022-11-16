@@ -73,7 +73,7 @@ class LinePathBuilder @Inject constructor(
     }
 
     private fun getPointOfCardById(cardId: Long, pointId: Int): Pair<Float, Float> {
-        val card = fileCache.factCards.find { it.id == cardId }!!
+        val card = fileCache.factCards.find { it.idFactCard == cardId }!!
         val pointInCard = FactCardRenderModel.POINTS[pointId]
         val point = Rect(
             pointInCard.first, pointInCard.second,

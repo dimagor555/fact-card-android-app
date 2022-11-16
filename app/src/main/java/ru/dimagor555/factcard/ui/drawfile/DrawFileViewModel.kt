@@ -17,14 +17,14 @@ class DrawFileViewModel @Inject constructor(
     val fileCanvas: FileCanvas,
     private val fileCache: FileCache,
 ) : ViewModel() {
-    fun setFileId(fileName: String) = viewModelScope.launch {
-        fileCache.loadFileByName(fileName)
+    fun setFileId(fileId: Long) = viewModelScope.launch {
+        fileCache.loadFileById(fileId)
         fileCanvas.updateCanvas()
-        updateFileLastUseTime(fileName)
+        updateFileLastUseTime(fileId)
     }
 
-    private suspend fun updateFileLastUseTime(fileName: String) {
-        val fileToUpdateLastUseTime = fileDao.getFileByName(fileName)
+    private suspend fun updateFileLastUseTime(fileId: Long) {
+        val fileToUpdateLastUseTime = fileDao.getFileById(fileId)
         fileToUpdateLastUseTime.lastUseTime = System.currentTimeMillis()
         fileDao.updateFile(fileToUpdateLastUseTime)
     }

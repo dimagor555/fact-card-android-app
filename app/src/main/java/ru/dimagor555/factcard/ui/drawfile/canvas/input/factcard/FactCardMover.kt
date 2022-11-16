@@ -28,7 +28,7 @@ class FactCardMover @Inject constructor(
     }
 
     private fun checkIfNewCard(selectedCard: FactCard) {
-        if (currCard?.id != selectedCard.id)
+        if (currCard?.idFactCard != selectedCard.idFactCard)
             resetNewCard(selectedCard)
     }
 
