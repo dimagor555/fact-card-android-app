@@ -5,34 +5,34 @@ import android.content.SharedPreferences
 import androidx.core.content.ContextCompat
 import ru.dimagor555.factcard.R
 import ru.dimagor555.factcard.ui.drawfile.canvas.ColorManager
+import androidx.core.content.edit
 
 object SettingsResetter {
     fun resetAllColors(sharedPreferences: SharedPreferences, context: Context) {
-        val edit = sharedPreferences.edit()
-        edit.putInt(ColorManager.COLOR_CANVAS_BG, getColor(R.color.colorCanvasBg, context))
+        sharedPreferences.edit {
+            putInt(ColorManager.COLOR_CANVAS_BG, getColor(R.color.colorCanvasBg, context))
 
-        edit.putInt(ColorManager.COLOR_FACT_CARD_BG, getColor(R.color.colorFactCardBg, context))
-        edit.putInt(
-            ColorManager.COLOR_FACT_CARD_BORDER,
-            getColor(R.color.colorFactCardBorder, context)
-        )
-        edit.putInt(ColorManager.COLOR_CARD_POINT, getColor(R.color.colorCardPoint, context))
-        edit.putInt(
-            ColorManager.COLOR_SELECTED_CARD_POINT,
-            getColor(R.color.colorSelectedCardPoint, context)
-        )
-        edit.putInt(
-            ColorManager.COLOR_FACT_CARD_TEXT,
-            getColor(R.color.colorFactCardText, context)
-        )
+            putInt(ColorManager.COLOR_FACT_CARD_BG, getColor(R.color.colorFactCardBg, context))
+            putInt(
+                ColorManager.COLOR_FACT_CARD_BORDER,
+                getColor(R.color.colorFactCardBorder, context)
+            )
+            putInt(ColorManager.COLOR_CARD_POINT, getColor(R.color.colorCardPoint, context))
+            putInt(
+                ColorManager.COLOR_SELECTED_CARD_POINT,
+                getColor(R.color.colorSelectedCardPoint, context)
+            )
+            putInt(
+                ColorManager.COLOR_FACT_CARD_TEXT,
+                getColor(R.color.colorFactCardText, context)
+            )
 
-        edit.putInt(ColorManager.COLOR_LINE, getColor(R.color.colorLine, context))
-        edit.putInt(
-            ColorManager.COLOR_SELECTED_LINE,
-            getColor(R.color.colorSelectedLine, context)
-        )
-
-        edit.apply()
+            putInt(ColorManager.COLOR_LINE, getColor(R.color.colorLine, context))
+            putInt(
+                ColorManager.COLOR_SELECTED_LINE,
+                getColor(R.color.colorSelectedLine, context)
+            )
+        }
     }
 
     private fun getColor(colorResId: Int, context: Context) =

@@ -25,16 +25,16 @@ class FileCanvasGestureListener @Inject constructor(
             fileCanvasClickProcessor.fileCanvas = value
         }
 
-    override fun onDown(e: MotionEvent?) = true
+    override fun onDown(e: MotionEvent) = true
 
-    override fun onSingleTapUp(e: MotionEvent?): Boolean {
+    override fun onSingleTapUp(e: MotionEvent): Boolean {
         if (isScaleEvent(e)) return false
-        fileCanvasClickProcessor.processClick(e?.x, e?.y)
+        fileCanvasClickProcessor.processClick(e.x, e.y)
         return true
     }
 
     override fun onScroll(
-        e1: MotionEvent?, e2: MotionEvent?,
+        e1: MotionEvent?, e2: MotionEvent,
         distanceX: Float, distanceY: Float
     ): Boolean {
         if (isScaleEvent(e1) || isScaleEvent(e2)) return false
@@ -56,19 +56,21 @@ class FileCanvasGestureListener @Inject constructor(
                     scaledDistanceY
                 )
             }
+
+            else -> Unit
         }
 
         return true
     }
 
-    override fun onScale(detector: ScaleGestureDetector?): Boolean {
-        detector?.let { fileLayout.onScale(it.scaleFactor) }
+    override fun onScale(detector: ScaleGestureDetector): Boolean {
+        fileLayout.onScale(detector.scaleFactor)
         return true
     }
 
-    override fun onScaleBegin(detector: ScaleGestureDetector?) = true
+    override fun onScaleBegin(detector: ScaleGestureDetector) = true
 
-    override fun onScaleEnd(detector: ScaleGestureDetector?) {
+    override fun onScaleEnd(detector: ScaleGestureDetector) {
     }
 
     private fun isScaleEvent(event: MotionEvent?) = event?.pointerCount == 2

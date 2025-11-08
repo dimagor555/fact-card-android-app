@@ -20,10 +20,8 @@ data class FactCard(
     var positionX: Int = 0,
     var positionY: Int = 0,
     @ColumnInfo(name = "textSize")
-    private var _textSize: Int = FactCardRenderModel.MAX_TEXT_HEIGHT.toInt() / 2,
+    var textSize: Int = FactCardRenderModel.MAX_TEXT_HEIGHT.toInt() / 2,
 ) {
-    val textSize
-        get() = _textSize
 
     @Ignore
     var selected = false
@@ -44,13 +42,13 @@ data class FactCard(
     var selectedPoint: Int? = null
 
     fun increaseTextSize() {
-        if (_textSize + TEXT_SIZE_INTERVAL <= MAX_TEXT_SIZE)
-            _textSize += TEXT_SIZE_INTERVAL
+        if (textSize + TEXT_SIZE_INTERVAL <= MAX_TEXT_SIZE)
+            textSize += TEXT_SIZE_INTERVAL
     }
 
     fun decreaseTextSize() {
-        if (_textSize - TEXT_SIZE_INTERVAL >= MIN_TEXT_SIZE)
-            _textSize -= TEXT_SIZE_INTERVAL
+        if (textSize - TEXT_SIZE_INTERVAL >= MIN_TEXT_SIZE)
+            textSize -= TEXT_SIZE_INTERVAL
     }
 
     companion object {

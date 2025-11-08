@@ -1,0 +1,76 @@
+[versions]
+# Build tools and language
+kotlin = "2.2.21"
+agp = "8.12.3"
+ksp = "2.3.0"
+
+# Dependency Injection
+hilt = "2.57.2"
+
+# Jetpack Navigation
+navigation = "2.9.6"
+
+# Room Database
+room = "2.8.3"
+
+# Lifecycle components
+lifecycle = "2.9.4"
+
+# AndroidX libraries
+coreKtx = "1.17.0"
+appcompat = "1.7.1"
+constraintlayout = "2.2.1"
+preferenceKtx = "1.2.1"
+
+# UI libraries
+material = "1.13.0"
+cardview = "1.0.0"
+
+# Third-party libraries
+colorpicker = "1.1.0"
+
+[libraries]
+# Kotlin
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+
+# Android core
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preferenceKtx" }
+
+# Material Design
+material = { module = "com.google.android.material:material", version.ref = "material" }
+androidx-cardview = { module = "androidx.cardview:cardview", version.ref = "cardview" }
+
+# Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+
+# Navigation
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation" }
+
+# Room
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+
+# Lifecycle
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle" }
+
+# Color Picker
+colorpicker = { module = "com.jaredrummler:colorpicker", version.ref = "colorpicker" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+
+[bundles]
+navigation = ["navigation-fragment-ktx", "navigation-ui-ktx"]
+room = ["room-runtime", "room-ktx"]
+lifecycle = ["lifecycle-viewmodel-ktx", "lifecycle-livedata-ktx"]

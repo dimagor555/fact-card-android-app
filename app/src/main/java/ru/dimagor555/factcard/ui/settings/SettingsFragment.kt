@@ -20,7 +20,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun resetAllColors() {
-        SettingsResetter.resetAllColors(preferenceManager.sharedPreferences, requireContext())
+        val prefs = preferenceManager.sharedPreferences ?: return
+        SettingsResetter.resetAllColors(prefs, requireContext())
         findNavController().popBackStack()
         findNavController().navigate(R.id.settingsFragment)
     }
