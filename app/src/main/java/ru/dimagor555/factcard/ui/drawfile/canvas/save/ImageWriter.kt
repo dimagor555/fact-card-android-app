@@ -5,13 +5,12 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
-import java.io.IOException
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -19,16 +18,17 @@ class ImageWriter @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
     fun hasPermissionToWriteFiles(): Boolean {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            true
+        } else {
             ContextCompat.checkSelfPermission(
                 context, Manifest.permission.WRITE_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED
-        } else {
-            true
         }
     }
 
     fun writeFileToGallery(fileName: String, bitmap: Bitmap): Boolean {
+        val resolver = context.contentResolver
         val picturesUri =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q)
                 MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
@@ -36,35 +36,23 @@ class ImageWriter @Inject constructor(
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
 
         val imageDetails = ContentValues().apply {
-            put(MediaStore.Images.Media.TITLE, fileName)
-            put(MediaStore.Images.Media.DISPLAY_NAME, fileName)
-            put(MediaStore.Images.Media.DESCRIPTION, "")
+            put(MediaStore.Images.Media.DISPLAY_NAME, "$fileName.png")
             put(MediaStore.Images.Media.MIME_TYPE, "image/png")
             put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+            put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+                put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
             }
         }
 
-        val resolver = context.contentResolver
-        var imageUri: Uri? = null
-
-        try {
-            imageUri = resolver.insert(picturesUri, imageDetails)
-                ?: throw IOException("Failed to insert image")
-
-            val outStream = resolver.openOutputStream(imageUri)
-                ?: throw IOException("Failed to open output stream")
-
-            outStream.use {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream)
+        return try {
+            val imageUri = resolver.insert(picturesUri, imageDetails) ?: return false
+            resolver.openOutputStream(imageUri)?.use { out ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
             }
-            return true
+            true
         } catch (e: Exception) {
-            if (imageUri != null)
-                resolver.delete(imageUri, null, null)
-            return false
+            false
         }
     }
 }
-
